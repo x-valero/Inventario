@@ -225,25 +225,26 @@ export default function Inventario() {
         {/* Header */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px", borderBottom: "1px solid #dc2626", paddingBottom: "16px", flexWrap: "wrap", gap: "10px" }}>
           <h1 style={{ fontSize: "22px", fontWeight: "bold", color: "white" }}>
-            📦 <span style={{ color: "#dc2626" }}>INVENTARIO VALERO STOREE</span> 
+            📦 <span style={{ color: "#dc2626" }}>INVENTARIO</span> VALERO STOREE
           </h1>
           <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
             <button onClick={() => router.push("/movimientos")} style={{ ...btnGray, flex: "unset", padding: "8px 12px" }}>MOVIMIENTOS</button>
             <button onClick={() => router.push("/categorias")} style={{ ...btnGray, flex: "unset", padding: "8px 12px" }}>CATEGORIAS</button>
-            <button onClick={() => setModalNuevo(true)} style={{ ...btnRed, flex: "unset", padding: "8px 12px" }}>NUEVO</button>
+            <button onClick={() => router.push("/usuarios")} style={{ ...btnGray, flex: "unset", padding: "8px 12px" }}>USUARIOS</button>
+            <button onClick={() => setModalNuevo(true)} style={{ ...btnRed, flex: "unset", padding: "8px 12px" }}>+ PRODUCTO</button>
             <button onClick={cerrarSesion} style={{ ...btnGray, flex: "unset", padding: "8px 12px" }}>SALIR</button>
           </div>
         </div>
 
         {/* Tabla */}
         {loading ? (
-          <p style={{ color: "#dc2626" }}>CARGANDO...</p>
+          <p style={{ color: "#dc2626" }}>Cargando...</p>
         ) : (
           <div style={{ backgroundColor: "#111111", borderRadius: "12px", border: "1px solid #222", overflow: "hidden" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "14px" }}>
               <thead style={{ backgroundColor: "#1a1a1a" }}>
                 <tr>
-                  {["Foto", "Producto", "Stock", "Mínimo", "Categoría", "Acciones"].map((h) => (
+                  {["FOTO", "PRODUCTO", "STOCK", "CANTIDAD MINIMA", "CATEGORIA", "-"].map((h) => (
                     <th key={h} style={{ padding: "12px 16px", textAlign: "left", color: "#dc2626", fontWeight: "600" }}>{h}</th>
                   ))}
                 </tr>
@@ -255,14 +256,14 @@ export default function Inventario() {
                       {p.imagen ? (
                         <img src={p.imagen} alt={p.nombre} style={{ width: "48px", height: "48px", objectFit: "cover", borderRadius: "8px", border: "1px solid #333" }} />
                       ) : (
-                        <div style={{ width: "48px", height: "48px", backgroundColor: "#1a1a1a", borderRadius: "8px", border: "1px solid #333", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "20px" }}></div>
+                        <img src="https://res.cloudinary.com/du3gbiyds/image/upload/bvs_xiwk2j.jpg" alt="default" style={{ width: "48px", height: "48px", objectFit: "cover", borderRadius: "8px", border: "1px solid #333" }} />
                       )}
                     </td>
                     <td style={{ padding: "12px 16px", color: "white", fontWeight: "500" }}>{p.nombre}</td>
                     <td style={{ padding: "12px 16px" }}>
                       <span style={{ color: p.stock <= p.stock_minimo ? "#ef4444" : "#4ade80", fontWeight: "bold" }}>{p.stock}</span>
                       {p.stock <= p.stock_minimo && (
-                        <span style={{ marginLeft: "6px", fontSize: "11px", backgroundColor: "#450a0a", color: "#f87171", padding: "2px 6px", borderRadius: "999px" }}>STOCK BAJO</span>
+                        <span style={{ marginLeft: "6px", fontSize: "11px", backgroundColor: "#450a0a", color: "#f87171", padding: "2px 6px", borderRadius: "999px" }}>⚠ Bajo</span>
                       )}
                     </td>
                     <td style={{ padding: "12px 16px", color: "#9ca3af" }}>{p.stock_minimo}</td>
@@ -278,7 +279,7 @@ export default function Inventario() {
               </tbody>
             </table>
             {productos.length === 0 && (
-              <p style={{ textAlign: "center", color: "#4b5563", padding: "32px" }}>NO HAY PRODUCTOS AUN</p>
+              <p style={{ textAlign: "center", color: "#4b5563", padding: "32px" }}>No hay productos aún</p>
             )}
           </div>
         )}
@@ -288,13 +289,13 @@ export default function Inventario() {
       {modalEliminar && productoEliminar && (
         <div style={modalOverlay}>
           <div style={modalBox("#dc2626")}>
-            <h2 style={{ fontSize: "18px", fontWeight: "bold", color: "white", marginBottom: "12px" }}>ELIMINAR PRODUCTO</h2>
+            <h2 style={{ fontSize: "18px", fontWeight: "bold", color: "white", marginBottom: "12px" }}>🗑️ Eliminar producto</h2>
             <p style={{ color: "#9ca3af", marginBottom: "20px" }}>
-              ¿SEGURO QUE QUIERES ELIMINAR? <span style={{ color: "white", fontWeight: "bold" }}>{productoEliminar.nombre}</span> ESTA ACCION PUEDE DESHACER!
+              ¿Seguro que quieres eliminar <span style={{ color: "white", fontWeight: "bold" }}>{productoEliminar.nombre}</span>? Esta acción no se puede deshacer.
             </p>
             <div style={{ display: "flex", gap: "8px" }}>
-              <button onClick={confirmarEliminar} style={btnRed}>SI ELIMINAR</button>
-              <button onClick={() => { setModalEliminar(false); setProductoEliminar(null); }} style={btnGray}>CANCELAR</button>
+              <button onClick={confirmarEliminar} style={btnRed}>Sí, eliminar</button>
+              <button onClick={() => { setModalEliminar(false); setProductoEliminar(null); }} style={btnGray}>Cancelar</button>
             </div>
           </div>
         </div>
@@ -304,7 +305,7 @@ export default function Inventario() {
       {modalNuevo && (
         <div style={modalOverlay}>
           <div style={modalBox("#dc2626")}>
-            <h2 style={{ fontSize: "18px", fontWeight: "bold", marginBottom: "16px", color: "white" }}>+ Nuevo <span style={{ color: "#dc2626" }}>PRODUCTO</span></h2>
+            <h2 style={{ fontSize: "18px", fontWeight: "bold", marginBottom: "16px", color: "white" }}>+ Nuevo <span style={{ color: "#dc2626" }}>producto</span></h2>
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
               <input placeholder="Nombre del producto" value={form.nombre} onChange={(e) => setForm({ ...form, nombre: e.target.value })} style={inputStyle} />
               <input type="number" placeholder="Stock inicial" value={form.stock} onChange={(e) => setForm({ ...form, stock: Number(e.target.value) })} style={inputStyle} />
@@ -340,7 +341,7 @@ export default function Inventario() {
 
               {/* Foto */}
               <div style={{ borderTop: "1px solid #222", paddingTop: "12px" }}>
-                <p style={{ color: "#dc2626", fontSize: "13px", marginBottom: "8px", fontWeight: "600" }}>FOTO DEL PRODUCTO</p>
+                <p style={{ color: "#dc2626", fontSize: "13px", marginBottom: "8px", fontWeight: "600" }}>Foto del producto</p>
                 <input type="file" accept="image/*" capture="environment" onChange={(e) => {
                   const file = e.target.files?.[0];
                   if (!file) return;
@@ -352,7 +353,7 @@ export default function Inventario() {
 
               <div style={{ display: "flex", gap: "8px", marginTop: "4px" }}>
                 <button onClick={crearProducto} disabled={subiendo} style={{ ...btnRed, opacity: subiendo ? 0.6 : 1 }}>{subiendo ? "Guardando..." : "Guardar"}</button>
-                <button onClick={() => { setModalNuevo(false); setImagenFile(null); setImagenPreview(""); setTallas([]); }} style={btnGray}>CANCELAR</button>
+                <button onClick={() => { setModalNuevo(false); setImagenFile(null); setImagenPreview(""); setTallas([]); }} style={btnGray}>Cancelar</button>
               </div>
             </div>
           </div>
@@ -363,14 +364,14 @@ export default function Inventario() {
       {modalEditar && productoEditar && (
         <div style={modalOverlay}>
           <div style={modalBox("#2563eb")}>
-            <h2 style={{ fontSize: "18px", fontWeight: "bold", marginBottom: "4px", color: "white" }}>EDITAR PRODUCTO</h2>
+            <h2 style={{ fontSize: "18px", fontWeight: "bold", marginBottom: "4px", color: "white" }}>✏️ Editar producto</h2>
             <p style={{ color: "#dc2626", fontWeight: "bold", marginBottom: "16px", fontSize: "16px" }}>{productoEditar.nombre}</p>
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
               <input placeholder="Nombre" value={productoEditar.nombre} onChange={(e) => setProductoEditar({ ...productoEditar, nombre: e.target.value })} style={inputStyle} />
               <input type="number" placeholder="Stock" value={productoEditar.stock} onChange={(e) => setProductoEditar({ ...productoEditar, stock: Number(e.target.value) })} style={inputStyle} />
               <input type="number" placeholder="Stock mínimo" value={productoEditar.stock_minimo} onChange={(e) => setProductoEditar({ ...productoEditar, stock_minimo: Number(e.target.value) })} style={inputStyle} />
               <select value={productoEditar.categoria_id} onChange={(e) => setProductoEditar({ ...productoEditar, categoria_id: Number(e.target.value) })} style={inputStyle}>
-                <option value={0}>SIN CATEGORIA</option>
+                <option value={0}>Sin categoría</option>
                 {categorias.map((c) => (<option key={c.id} value={c.id}>{c.nombre}</option>))}
               </select>
 
@@ -403,13 +404,13 @@ export default function Inventario() {
                       setNuevaTallaEditar({ talla: "", cantidad: 0 });
                     }}
                     style={{ backgroundColor: "#2563eb", color: "white", padding: "8px 12px", borderRadius: "8px", border: "none", cursor: "pointer", whiteSpace: "nowrap" }}
-                  >AGREGAR</button>
+                  >+ Add</button>
                 </div>
               </div>
 
               {/* Foto editar */}
               <div style={{ borderTop: "1px solid #222", paddingTop: "12px" }}>
-                <p style={{ color: "#60a5fa", fontSize: "13px", marginBottom: "8px", fontWeight: "600" }}>CAMBIAR FOTO</p>
+                <p style={{ color: "#60a5fa", fontSize: "13px", marginBottom: "8px", fontWeight: "600" }}>Cambiar foto</p>
                 <input type="file" accept="image/*" capture="environment" onChange={(e) => {
                   const file = e.target.files?.[0];
                   if (!file) return;
@@ -421,7 +422,7 @@ export default function Inventario() {
 
               <div style={{ display: "flex", gap: "8px", marginTop: "4px" }}>
                 <button onClick={editarProducto} disabled={subiendo} style={{ ...btnBlue, opacity: subiendo ? 0.6 : 1 }}>{subiendo ? "Guardando..." : "Guardar"}</button>
-                <button onClick={() => { setModalEditar(false); setProductoEditar(null); setImagenEditFile(null); setImagenEditPreview(""); setTallasEditar([]); }} style={btnGray}>CANCELAR</button>
+                <button onClick={() => { setModalEditar(false); setProductoEditar(null); setImagenEditFile(null); setImagenEditPreview(""); setTallasEditar([]); }} style={btnGray}>Cancelar</button>
               </div>
             </div>
           </div>
