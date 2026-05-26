@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Inventario App",
@@ -26,7 +29,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Inventario App" />
         <link rel="apple-touch-icon" href="/icon-192.png" />
       </head>
-      <body style={{ margin: 0, padding: 0, backgroundColor: "#0a0a0a" }}>
+      <body className={inter.className} style={{ margin: 0, padding: 0, backgroundColor: "#0a0a0a" }}>
         {children}
       </body>
     </html>

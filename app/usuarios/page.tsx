@@ -74,77 +74,94 @@ export default function Usuarios() {
   }
 
   const inputStyle = {
-    border: "1px solid #dc2626",
-    borderRadius: "8px",
-    padding: "10px 14px",
-    fontSize: "14px",
+    border: "1px solid #48484a",
+    borderRadius: "10px",
+    padding: "12px",
+    fontSize: "16px",
     color: "white",
-    backgroundColor: "#1a1a1a",
+    backgroundColor: "#3a3a3c",
     outline: "none",
     width: "100%",
     boxSizing: "border-box" as const,
   };
 
-  const modalOverlay = { position: "fixed" as const, inset: 0, backgroundColor: "rgba(0,0,0,0.8)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 50, padding: "16px" };
-  const modalBox = (border: string) => ({ backgroundColor: "#111111", borderRadius: "12px", padding: "24px", width: "100%", maxWidth: "400px", border: `1px solid ${border}` });
+  const modalOverlay = { position: "fixed" as const, inset: 0, backgroundColor: "rgba(0,0,0,0.75)", display: "flex", alignItems: "flex-end", justifyContent: "center", zIndex: 50 };
+  const modalBox = (border: string) => ({ backgroundColor: "#2c2c2e", borderRadius: "20px 20px 0 0", padding: "24px", width: "100%", maxWidth: "500px", border: `1px solid ${border}`, maxHeight: "90vh", overflowY: "auto" as const });
 
   return (
-    <main style={{ minHeight: "100vh", backgroundColor: "#0a0a0a", padding: "24px", fontFamily: "system-ui, sans-serif" }}>
-      <div style={{ maxWidth: "700px", margin: "0 auto" }}>
+    <main style={{ minHeight: "100vh", backgroundColor: "#1c1c1e", paddingBottom: "80px" }}>
 
-        {/* Header */}
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "32px", borderBottom: "1px solid #dc2626", paddingBottom: "16px" }}>
-          <h1 style={{ fontSize: "22px", fontWeight: "bold", color: "white" }}>
+      {/* Header */}
+      <div style={{ backgroundColor: "#2c2c2e", borderBottom: "1px solid #dc2626", padding: "16px", position: "sticky", top: 0, zIndex: 40 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <h1 style={{ fontSize: "18px", fontWeight: "800", color: "white", margin: 0 }}>
             👤 <span style={{ color: "#dc2626" }}>Usuarios</span>
           </h1>
-          <div style={{ display: "flex", gap: "10px" }}>
-            <button onClick={() => setModal(true)} style={{ backgroundColor: "#dc2626", color: "white", padding: "8px 16px", borderRadius: "8px", border: "none", cursor: "pointer", fontWeight: "600" }}>
-              + Nuevo usuario
-            </button>
-            <button onClick={() => router.push("/inventario")} style={{ backgroundColor: "#1a1a1a", color: "white", padding: "8px 16px", borderRadius: "8px", border: "1px solid #444", cursor: "pointer" }}>
-              ← Volver
-            </button>
-          </div>
+          <button onClick={() => setModal(true)} style={{ backgroundColor: "#dc2626", color: "white", padding: "8px 16px", borderRadius: "10px", border: "none", cursor: "pointer", fontSize: "14px", fontWeight: "700" }}>
+            + Nuevo
+          </button>
         </div>
+      </div>
 
-        {/* Lista */}
+      {/* Lista */}
+      <div style={{ padding: "16px" }}>
         {loading ? (
-          <p style={{ color: "#dc2626" }}>Cargando...</p>
+          <p style={{ color: "#dc2626", textAlign: "center", marginTop: "40px" }}>Cargando...</p>
         ) : (
-          <div style={{ backgroundColor: "#111111", borderRadius: "12px", border: "1px solid #222", overflow: "hidden" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
             {usuarios.map((u) => (
-              <div key={u.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "16px 20px", borderBottom: "1px solid #1f1f1f" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-                  <div style={{ width: "42px", height: "42px", backgroundColor: "#dc2626", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "18px", fontWeight: "bold", color: "white" }}>
+              <div key={u.id} style={{ backgroundColor: "#2c2c2e", borderRadius: "14px", border: "1px solid #3a3a3c", overflow: "hidden" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "14px", padding: "14px" }}>
+                  <div style={{ width: "48px", height: "48px", backgroundColor: "#dc2626", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "20px", fontWeight: "800", color: "white", flexShrink: 0 }}>
                     {u.nombre.charAt(0).toUpperCase()}
                   </div>
-                  <div>
-                    <p style={{ color: "white", fontWeight: "600", margin: 0 }}>{u.nombre}</p>
-                    <p style={{ color: "#4b5563", fontSize: "13px", margin: 0 }}>{u.email}</p>
+                  <div style={{ flex: 1 }}>
+                    <p style={{ color: "white", fontWeight: "700", margin: "0 0 2px", fontSize: "16px" }}>{u.nombre}</p>
+                    <p style={{ color: "#8e8e93", fontSize: "13px", margin: 0 }}>{u.email}</p>
                   </div>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                  <span style={{ backgroundColor: u.rol === "admin" ? "#450a0a" : "#1a2e1a", color: u.rol === "admin" ? "#f87171" : "#4ade80", padding: "4px 10px", borderRadius: "999px", fontSize: "12px", fontWeight: "600" }}>
+                  <span style={{ backgroundColor: u.rol === "admin" ? "#3a0a0a" : "#0a2a0a", color: u.rol === "admin" ? "#ff453a" : "#30d158", padding: "4px 10px", borderRadius: "999px", fontSize: "12px", fontWeight: "700" }}>
                     {u.rol}
                   </span>
-                  <button onClick={() => { setUsuarioEliminar(u); setModalEliminar(true); }} style={{ color: "#ef4444", background: "none", border: "none", cursor: "pointer", fontSize: "13px" }}>
-                    🗑️ Eliminar
+                </div>
+                <div style={{ borderTop: "1px solid #3a3a3c" }}>
+                  <button
+                    onClick={() => { setUsuarioEliminar(u); setModalEliminar(true); }}
+                    style={{ width: "100%", padding: "12px", backgroundColor: "transparent", border: "none", color: "#ff453a", cursor: "pointer", fontSize: "14px", fontWeight: "600" }}
+                  >
+                    🗑️ Eliminar usuario
                   </button>
                 </div>
               </div>
             ))}
             {usuarios.length === 0 && (
-              <p style={{ textAlign: "center", color: "#4b5563", padding: "32px" }}>No hay usuarios</p>
+              <p style={{ textAlign: "center", color: "#8e8e93", padding: "40px" }}>No hay usuarios</p>
             )}
           </div>
         )}
+      </div>
+
+      {/* Nav inferior */}
+      <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, backgroundColor: "#2c2c2e", borderTop: "1px solid #3a3a3c", display: "flex", zIndex: 40 }}>
+        {[
+          { label: "📦 Inicio", path: "/inventario" },
+          { label: "📋 Movimientos", path: "/movimientos" },
+          { label: "🏷️ Categorías", path: "/categorias" },
+          { label: "👤 Usuarios", path: "/usuarios" },
+        ].map((item) => (
+          <button key={item.path} onClick={() => router.push(item.path)} style={{ flex: 1, padding: "12px 4px", backgroundColor: "transparent", border: "none", color: item.path === "/usuarios" ? "#dc2626" : "#8e8e93", cursor: "pointer", fontSize: "11px", fontWeight: item.path === "/usuarios" ? "700" : "400" }}>
+            {item.label}
+          </button>
+        ))}
+        <button onClick={() => { localStorage.clear(); router.push("/"); }} style={{ flex: 1, padding: "12px 4px", backgroundColor: "transparent", border: "none", color: "#8e8e93", cursor: "pointer", fontSize: "11px" }}>
+          🚪 Salir
+        </button>
       </div>
 
       {/* Modal nuevo usuario */}
       {modal && (
         <div style={modalOverlay}>
           <div style={modalBox("#dc2626")}>
-            <h2 style={{ fontSize: "18px", fontWeight: "bold", marginBottom: "20px", color: "white" }}>
+            <h2 style={{ fontSize: "18px", fontWeight: "700", marginBottom: "20px", color: "white" }}>
               + Nuevo <span style={{ color: "#dc2626" }}>usuario</span>
             </h2>
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
@@ -155,12 +172,12 @@ export default function Usuarios() {
                 <option value="admin">Admin</option>
                 <option value="empleado">Empleado</option>
               </select>
-              {error && <p style={{ color: "#f87171", fontSize: "13px", margin: 0 }}>⚠️ {error}</p>}
+              {error && <p style={{ color: "#ff453a", fontSize: "13px", margin: 0 }}>⚠️ {error}</p>}
               <div style={{ display: "flex", gap: "8px", marginTop: "4px" }}>
-                <button onClick={crearUsuario} disabled={guardando} style={{ flex: 1, backgroundColor: "#dc2626", color: "white", padding: "10px", borderRadius: "8px", border: "none", cursor: "pointer", fontWeight: "600" }}>
+                <button onClick={crearUsuario} disabled={guardando} style={{ flex: 1, backgroundColor: "#dc2626", color: "white", padding: "14px", borderRadius: "12px", border: "none", cursor: "pointer", fontWeight: "700", fontSize: "15px" }}>
                   {guardando ? "Guardando..." : "Guardar"}
                 </button>
-                <button onClick={() => { setModal(false); setError(""); setForm({ nombre: "", email: "", password: "", rol: "admin" }); }} style={{ flex: 1, backgroundColor: "#2a2a2a", color: "white", padding: "10px", borderRadius: "8px", border: "1px solid #444", cursor: "pointer" }}>
+                <button onClick={() => { setModal(false); setError(""); setForm({ nombre: "", email: "", password: "", rol: "admin" }); }} style={{ flex: 1, backgroundColor: "#3a3a3c", color: "white", padding: "14px", borderRadius: "12px", border: "1px solid #48484a", cursor: "pointer", fontSize: "15px" }}>
                   Cancelar
                 </button>
               </div>
@@ -172,14 +189,14 @@ export default function Usuarios() {
       {/* Modal confirmar eliminar */}
       {modalEliminar && usuarioEliminar && (
         <div style={modalOverlay}>
-          <div style={modalBox("#dc2626")}>
-            <h2 style={{ fontSize: "18px", fontWeight: "bold", color: "white", marginBottom: "12px" }}>🗑️ Eliminar usuario</h2>
-            <p style={{ color: "#9ca3af", marginBottom: "20px" }}>
-              ¿Seguro que quieres eliminar a <span style={{ color: "white", fontWeight: "bold" }}>{usuarioEliminar.nombre}</span>?
+          <div style={modalBox("#ff453a")}>
+            <h2 style={{ fontSize: "18px", fontWeight: "700", color: "white", marginBottom: "12px" }}>🗑️ Eliminar usuario</h2>
+            <p style={{ color: "#8e8e93", marginBottom: "20px" }}>
+              ¿Seguro que quieres eliminar a <span style={{ color: "white", fontWeight: "700" }}>{usuarioEliminar.nombre}</span>?
             </p>
             <div style={{ display: "flex", gap: "8px" }}>
-              <button onClick={confirmarEliminar} style={{ flex: 1, backgroundColor: "#dc2626", color: "white", padding: "10px", borderRadius: "8px", border: "none", cursor: "pointer" }}>Sí, eliminar</button>
-              <button onClick={() => { setModalEliminar(false); setUsuarioEliminar(null); }} style={{ flex: 1, backgroundColor: "#2a2a2a", color: "white", padding: "10px", borderRadius: "8px", border: "1px solid #444", cursor: "pointer" }}>Cancelar</button>
+              <button onClick={confirmarEliminar} style={{ flex: 1, backgroundColor: "#dc2626", color: "white", padding: "14px", borderRadius: "12px", border: "none", cursor: "pointer", fontWeight: "700" }}>Sí, eliminar</button>
+              <button onClick={() => { setModalEliminar(false); setUsuarioEliminar(null); }} style={{ flex: 1, backgroundColor: "#3a3a3c", color: "white", padding: "14px", borderRadius: "12px", border: "1px solid #48484a", cursor: "pointer" }}>Cancelar</button>
             </div>
           </div>
         </div>
