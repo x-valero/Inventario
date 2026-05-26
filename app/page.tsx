@@ -42,7 +42,6 @@ export default function Home() {
       padding: "16px",
       fontFamily: "system-ui, sans-serif"
     }}>
-      {/* Fondo con efecto */}
       <div style={{
         position: "fixed",
         inset: 0,
@@ -50,7 +49,6 @@ export default function Home() {
         zIndex: 0
       }} />
 
-      {/* Círculo decorativo rojo */}
       <div style={{
         position: "fixed",
         top: "-100px",
@@ -61,18 +59,7 @@ export default function Home() {
         background: "radial-gradient(circle, rgba(220,38,38,0.15) 0%, transparent 70%)",
         zIndex: 0
       }} />
-      <div style={{
-        position: "fixed",
-        bottom: "-100px",
-        left: "-100px",
-        width: "400px",
-        height: "400px",
-        borderRadius: "50%",
-        background: "radial-gradient(circle, rgba(220,38,38,0.08) 0%, transparent 70%)",
-        zIndex: 0
-      }} />
 
-      {/* Card */}
       <div style={{
         position: "relative",
         zIndex: 1,
@@ -85,7 +72,6 @@ export default function Home() {
         boxShadow: "0 0 40px rgba(220,38,38,0.1), 0 20px 60px rgba(0,0,0,0.5)"
       }}>
 
-        {/* Logo / Icono */}
         <div style={{ textAlign: "center", marginBottom: "32px" }}>
           <div style={{
             width: "64px",
@@ -98,26 +84,21 @@ export default function Home() {
             fontSize: "28px",
             margin: "0 auto 16px",
             boxShadow: "0 0 20px rgba(220,38,38,0.4)"
-          }}>📦</div>
-          <h1 style={{ color: "white", fontSize: "24px", fontWeight: "800", margin: 0, letterSpacing: "-0.5px" }}>
+          }}>|||</div>
+          <h1 style={{ color: "white", fontSize: "22px", fontWeight: "800", margin: "0 0 4px", letterSpacing: "-0.5px" }}>
             INVENTARIO <span style={{ color: "#dc2626" }}>VALERO STOREE</span>
           </h1>
-          <p style={{ color: "#4b5563", fontSize: "14px", marginTop: "6px" }}>
+          <p style={{ color: "#4b5563", fontSize: "13px", margin: 0, letterSpacing: "1px" }}>
             INICIA SESION PARA CONTINUAR
           </p>
         </div>
 
-        {/* Campos */}
         <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-
-          {/* Email */}
           <div>
-            <label style={{ color: "#9ca3af", fontSize: "12px", fontWeight: "600", display: "block", marginBottom: "6px", letterSpacing: "0.5px" }}>
-              EMAIL
-            </label>
+            <label style={{ color: "#9ca3af", fontSize: "11px", fontWeight: "600", display: "block", marginBottom: "6px", letterSpacing: "1px" }}>EMAIL</label>
             <input
               type="email"
-              placeholder="CORREO ELECTRONICO"
+              placeholder="Correo electrónico"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && login()}
@@ -131,18 +112,14 @@ export default function Home() {
                 fontSize: "15px",
                 outline: "none",
                 boxSizing: "border-box" as const,
-                transition: "border-color 0.2s",
               }}
               onFocus={(e) => e.target.style.borderColor = "#dc2626"}
               onBlur={(e) => e.target.style.borderColor = "#2a2a2a"}
             />
           </div>
 
-          {/* Password */}
           <div>
-            <label style={{ color: "#9ca3af", fontSize: "12px", fontWeight: "600", display: "block", marginBottom: "6px", letterSpacing: "0.5px" }}>
-              CONTRASEÑA
-            </label>
+            <label style={{ color: "#9ca3af", fontSize: "11px", fontWeight: "600", display: "block", marginBottom: "6px", letterSpacing: "1px" }}>CONTRASEÑA</label>
             <input
               type="password"
               placeholder="••••••••"
@@ -165,7 +142,6 @@ export default function Home() {
             />
           </div>
 
-          {/* Error */}
           {error && (
             <div style={{
               backgroundColor: "#450a0a",
@@ -182,7 +158,6 @@ export default function Home() {
             </div>
           )}
 
-          {/* Botón */}
           <button
             onClick={login}
             disabled={loading}
@@ -199,15 +174,13 @@ export default function Home() {
               marginTop: "4px",
               letterSpacing: "0.5px",
               boxShadow: loading ? "none" : "0 0 20px rgba(220,38,38,0.3)",
-              transition: "all 0.2s"
             }}
           >
             {loading ? "Iniciando sesión..." : "ENTRAR →"}
           </button>
         </div>
 
-        {/* Footer */}
-        <p style={{ color: "#2a2a2a", fontSize: "11px", textAlign: "center", marginTop: "24px" }}>
+        <p style={{ color: "#2a2a2a", fontSize: "11px", textAlign: "center", marginTop: "24px", letterSpacing: "1px" }}>
           © 2026 VALERO STOREE
         </p>
       </div>

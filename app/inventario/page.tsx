@@ -219,10 +219,10 @@ export default function Inventario() {
       <div style={{ backgroundColor: "#111", borderBottom: "1px solid #dc2626", padding: "16px", position: "sticky", top: 0, zIndex: 40 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <h1 style={{ fontSize: "18px", fontWeight: "bold", color: "white", margin: 0 }}>
-            📦 <span style={{ color: "#dc2626" }}>Inventario</span>
+             <span style={{ color: "#dc2626" }}>INVENTARIO VALERO STOREE</span>
           </h1>
           <button onClick={() => setModalNuevo(true)} style={{ backgroundColor: "#dc2626", color: "white", padding: "8px 16px", borderRadius: "8px", border: "none", cursor: "pointer", fontSize: "14px", fontWeight: "bold" }}>
-            + Nuevo
+            + NUEVO
           </button>
         </div>
       </div>
@@ -241,7 +241,7 @@ export default function Inventario() {
                     {p.imagen ? (
                       <img src={p.imagen} alt={p.nombre} style={{ width: "70px", height: "70px", objectFit: "cover", borderRadius: "10px", border: "1px solid #333" }} />
                     ) : (
-                      <div style={{ width: "70px", height: "70px", backgroundColor: "#1a1a1a", borderRadius: "10px", border: "1px solid #333", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px" }}>📦</div>
+                      <div style={{ width: "70px", height: "70px", backgroundColor: "#1a1a1a", borderRadius: "10px", border: "1px solid #333", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px" }}></div>
                     )}
                   </div>
 
@@ -268,14 +268,14 @@ export default function Inventario() {
                     onClick={() => { setProductoEditar(p); setImagenEditPreview(p.imagen || ""); cargarTallas(p.id); setModalEditar(true); }}
                     style={{ flex: 1, padding: "12px", backgroundColor: "transparent", border: "none", color: "#60a5fa", cursor: "pointer", fontSize: "14px", fontWeight: "600" }}
                   >
-                    ✏️ Editar
+                    ✏️ EDITAR
                   </button>
                   <div style={{ width: "1px", backgroundColor: "#1f1f1f" }} />
                   <button
                     onClick={() => { setProductoEliminar(p); setModalEliminar(true); }}
                     style={{ flex: 1, padding: "12px", backgroundColor: "transparent", border: "none", color: "#ef4444", cursor: "pointer", fontSize: "14px", fontWeight: "600" }}
                   >
-                    🗑️ Eliminar
+                    🗑️ ELIMINAR
                   </button>
                 </div>
               </div>
@@ -290,17 +290,17 @@ export default function Inventario() {
       {/* Barra navegación inferior */}
       <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, backgroundColor: "#111", borderTop: "1px solid #222", display: "flex", zIndex: 40 }}>
         {[
-          { label: "📦 Inventario", path: "/inventario" },
-          { label: "📋 Movimientos", path: "/movimientos" },
-          { label: "🏷️ Categorías", path: "/categorias" },
-          { label: "👤 Usuarios", path: "/usuarios" },
+          { label: "INVENTARIO", path: "/inventario" },
+          { label: "MOVIMIENTOS", path: "/movimientos" },
+          { label: "CATEGORIAS", path: "/categorias" },
+          { label: "USUARIOS", path: "/usuarios" },
         ].map((item) => (
           <button key={item.path} onClick={() => router.push(item.path)} style={{ flex: 1, padding: "12px 4px", backgroundColor: "transparent", border: "none", color: item.path === "/inventario" ? "#dc2626" : "#9ca3af", cursor: "pointer", fontSize: "11px", fontWeight: item.path === "/inventario" ? "700" : "400" }}>
             {item.label}
           </button>
         ))}
         <button onClick={cerrarSesion} style={{ flex: 1, padding: "12px 4px", backgroundColor: "transparent", border: "none", color: "#9ca3af", cursor: "pointer", fontSize: "11px" }}>
-          🚪 Salir
+          SALIR
         </button>
       </div>
 
